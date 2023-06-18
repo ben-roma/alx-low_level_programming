@@ -1,6 +1,11 @@
 #include <stdio.h>
  /**
-  *  output with puts command
+  *main - Entry point 
+  *
+  *Description: 'A Simple Output'
+  *
+  *return : always 0 (Success)
+  *
  */
 
 int main(void)
