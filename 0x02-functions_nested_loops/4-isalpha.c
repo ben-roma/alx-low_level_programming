@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * _isalpla - show if the input is a letter
+ * _isalpha - show if the input is a letter
+ * @c: The character in ASCII
  * Return: 1 if c is a letter, 0 otherwise
 **/
 
