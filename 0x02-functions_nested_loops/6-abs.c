@@ -5,7 +5,7 @@
  *
  * @n : input number a an integer
  *
- * Return : absolute value
+ * Return: absolute value
  *
 **/
 
