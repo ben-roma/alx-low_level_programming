@@ -19,7 +19,7 @@ int main(void)
 		Sum = n1 + n2;
 		printf(", %ld", Sum);
 		n1 = n2;
-		n2 = fn;
+		n2 = Sum;
 	}
 	printf("\n");
 	return (0);
