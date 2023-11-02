@@ -3,22 +3,27 @@
 
 /**
  * _calloc - allocates memory for an array
- * @nmemb: function parameter
- * @size: func para
- * Return: void
+ * @nmemb: number of elements
+ * @size: size of each element
+ * Return: pointer to the allocated memory
  */
 
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	char *p;
+	unsigned int total_size, i;
 
-	if (nmemb <= 0 || size <= 0)
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	p = malloc(nmemb * size);
+
+	total_size = nmemb * size;
+
+	p = malloc(total_size);
 	if (p == NULL)
 		return (NULL);
-	nmemb *= size;
-	while (nmemb--)
-		p[nmemb] = 0;
+
+	for (i = 0; i < total_size; i++)
+		p[i] = 0;
+
 	return ((void *)p);
 }
