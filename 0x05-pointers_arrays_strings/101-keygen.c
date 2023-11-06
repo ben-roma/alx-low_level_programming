@@ -2,24 +2,34 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define PASSWORD_LENGTH 10
+
 /**
- * main - generates keygen.
- * Return: 0 Always.
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int r = 0, c = 0;
-	time_t t;
+	char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	char password[PASSWORD_LENGTH + 1];
+	int index;
+	unsigned int seed;
 
-	srand((unsigned int) time(&t));
-	while (c < 2772)
+	/* Use the current time as a seed for random number generator */
+	seed = time(NULL);
+	srand(seed);
+
+	for (int i = 0; i < PASSWORD_LENGTH; i++)
 	{
-		r = rand() % 128;
-		if ((c + r) > 2772)
-			break;
-		c = c + r;
-		printf("%c", r);
+		index = rand() % (sizeof(charset) - 1);
+		password[i] = charset[index];
 	}
-	printf("%c\n", (2772 - c));
+
+	/* Null-terminate the string */
+	password[PASSWORD_LENGTH] = '\0';
+
+	printf("%s\n", password);
+
 	return (0);
 }
