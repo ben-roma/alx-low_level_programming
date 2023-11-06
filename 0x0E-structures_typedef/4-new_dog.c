@@ -20,32 +20,32 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 	/* Allocating memory for the new dog structure */
 	newdog = malloc(sizeof(dog_t));
-    if (newdog == NULL)
-        return (NULL);
+	if (newdog == NULL)
+		return (NULL);
 
-    /* Allocating memory and copying the name */
-    new_name = malloc(strlen(name) + 1);
-    if (new_name == NULL)
-    {
-        free(newdog); /* Free dog structure if name allocation fails */
-        return (NULL);
-    }
-    strcpy(new_name, name);
+	/* Allocating memory and copying the name */
+	new_name = malloc(strlen(name) + 1);
+	if (new_name == NULL)
+	{
+		free(newdog); /* Free dog structure if name allocation fails */
+		return (NULL);
+	}
+	strcpy(new_name, name);
 
-    /* Allocating memory and copying the owner */
-    new_owner = malloc(strlen(owner) + 1);
-    if (new_owner == NULL)
-    {
-        free(new_name); /* Free previously allocated memory */
-        free(newdog);
-        return (NULL);
-    }
-    strcpy(new_owner, owner);
+	/* Allocating memory and copying the owner */
+	new_owner = malloc(strlen(owner) + 1);
+	if (new_owner == NULL)
+	{
+		free(new_name); /* Free previously allocated memory */
+		free(newdog);
+		return (NULL);
+	}
+	strcpy(new_owner, owner);
 
-    /* Assigning the fields to the new dog structure */
-    newdog->name = new_name;
-    newdog->age = age;
-    newdog->owner = new_owner;
+	/* Assigning the fields to the new dog structure */
+	newdog->name = new_name;
+	newdog->age = age;
+	newdog->owner = new_owner;
 
-    return (newdog);
+	return (newdog);
 }
