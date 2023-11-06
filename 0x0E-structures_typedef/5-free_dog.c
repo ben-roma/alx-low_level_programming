@@ -11,14 +11,14 @@
  */
 void free_dog(dog_t *d)
 {
-    /* Only attempt to free if d is not NULL */
-    if (d != NULL)
-    {
-        /* Free the memory allocated for name and owner strings */
-        free(d->name);
-        free(d->owner);
+	/* Only attempt to free if d is not NULL */
+	if (d)
+	{
+		/* Free the memory allocated for name and owner strings */
+		free(d->name);
+		free(d->owner);
 
-        /* Finally, free the dog structure */
-        free(d);
-    }
+		/* Finally, free the dog structure */
+		free(d);
+	}
 }
