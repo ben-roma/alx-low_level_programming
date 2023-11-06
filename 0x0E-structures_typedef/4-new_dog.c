@@ -1,53 +1,51 @@
 #include "dog.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
- * new_dog - creates a new dog.
- * @name: name of the dog.
- * @age: age of the dog.
- * @owner: owner of the dog.
+ * new_dog - creates a new dog
+ * @name: name of the dog
+ * @age: age of the dog
+ * @owner: owner of the dog
  *
- * Return: struct dog.
- * if fails, returns NULL.
+ * Description: Allocates space for a new dog structure, and copies the name
+ * and owner into it. If any malloc fails, the function will free all
+ * previously allocated spaces and return NULL.
+ * Return: pointer to new dog struct, NULL if function fails
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *p_dog;
-	int i, lname, lowner;
+	dog_t *newdog;
+	char *new_name, *new_owner;
 
-	p_dog = malloc(sizeof(*p_dog));
-	if (p_dog == NULL || !(name) || !(owner))
-	{
-		free(p_dog);
-		return (NULL);
-	}
+	/* Allocating memory for the new dog structure */
+	newdog = malloc(sizeof(dog_t));
+    if (newdog == NULL)
+        return (NULL);
 
-	for (lname = 0; name[lname]; lname++)
-		;
+    /* Allocating memory and copying the name */
+    new_name = malloc(strlen(name) + 1);
+    if (new_name == NULL)
+    {
+        free(newdog); /* Free dog structure if name allocation fails */
+        return (NULL);
+    }
+    strcpy(new_name, name);
 
-	for (lowner = 0; owner[lowner]; lowner++)
-		;
+    /* Allocating memory and copying the owner */
+    new_owner = malloc(strlen(owner) + 1);
+    if (new_owner == NULL)
+    {
+        free(new_name); /* Free previously allocated memory */
+        free(newdog);
+        return (NULL);
+    }
+    strcpy(new_owner, owner);
 
-	p_dog->name = malloc(lname + 1);
-	p_dog->owner = malloc(lowner + 1);
+    /* Assigning the fields to the new dog structure */
+    newdog->name = new_name;
+    newdog->age = age;
+    newdog->owner = new_owner;
 
-	if (!(p_dog->name) || !(p_dog->owner))
-	{
-		free(p_dog->owner);
-		free(p_dog->name);
-		free(p_dog);
-		return (NULL);
-	}
-
-	for (i = 0; i < lname; i++)
-		p_dog->name[i] = name[i];
-	p_dog->name[i] = '\0';
-
-	p_dog->age = age;
-
-	for (i = 0; i < lowner; i++)
-		p_dog->owner[i] = owner[i];
-	p_dog->owner[i] = '\0';
-
-	return (p_dog);
+    return (newdog);
 }
