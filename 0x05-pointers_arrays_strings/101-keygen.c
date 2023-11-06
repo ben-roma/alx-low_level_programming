@@ -2,34 +2,33 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define PASSWORD_LENGTH 10
-
 /**
- * main - Entry point
+ * main - Generates random passwords for the program 101-crackme.
  *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	char password[PASSWORD_LENGTH + 1];
-	int index;
-	unsigned int seed;
+	int sum = 0, diff = 2772;
+	char c;
 
-	/* Use the current time as a seed for random number generator */
-	seed = time(NULL);
-	srand(seed);
+	srand((unsigned int) time(NULL));
 
-	for (int i = 0; i < PASSWORD_LENGTH; i++)
+	while (diff > 126) /* Tant que la différence est plus grande que le caractère ASCII maximal */
 	{
-		index = rand() % (sizeof(charset) - 1);
-		password[i] = charset[index];
+		c = (rand() % (126 - 32 + 1)) + 32; /*Génère un caractère imprimable*/ 
+		sum += c; // Ajoute la valeur ASCII du caractère à la somme
+		if (sum > 2772)
+		{
+			sum -= c; /* Enlève le dernier caractère si la somme dépasse 2772*/
+			continue;
+		}
+		diff -= c; /* Met à jour la différence requise*/
+		printf("%c", c); /* Affiche le caractère */
 	}
 
-	/* Null-terminate the string */
-	password[PASSWORD_LENGTH] = '\0';
-
-	printf("%s\n", password);
+	/* Imprime le dernier caractère pour atteindre exactement la somme de 2772*/
+	printf("%c\n", diff); /* Assure que le dernier caractère fait atteindre la somme exacte de 2772 */
 
 	return (0);
 }
