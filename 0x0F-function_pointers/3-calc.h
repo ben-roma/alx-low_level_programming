@@ -3,9 +3,10 @@
 
 /**
  * struct op - Struct op
- *
  * @op: The operator
  * @f: The function associated
+ *
+ * Description: This struct type defines an operator and its associated function.
  */
 typedef struct op
 {
