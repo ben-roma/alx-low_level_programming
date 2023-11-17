@@ -1,20 +1,22 @@
 section .data
-	hello db "Hello, Holberton", 0
+    hello db "Hello, Holberton", 0
 
 section .text
-	global main
+    global main
 
-	extern printf
-	global _start
+    ; ssize_t write(int fd, const void *buf, size_t count)
+    extern write, exit
 
 main:
-	; Prepare arguments for printf
-	mov rdi, hello
-	mov rax, 0            ; 0 corresponds to the format string "%s"
-	call printf
+    ; Prepare arguments for write
+    mov rax, 1            ; syscall number for write
+    mov rdi, 1            ; file descriptor 1 (stdout)
+    mov rsi, hello        ; pointer to the string
+    mov rdx, 17           ; length of the string
+    syscall
 
-	; Exit the program
-	mov rax, 60           ; syscall number for exit
-	xor rdi, rdi          ; exit code 0
-	syscall
+    ; Exit the program
+    mov rax, 60           ; syscall number for exit
+    xor rdi, rdi          ; exit code 0
+    syscall
 
