@@ -1,15 +1,20 @@
-SECTION .data
-msg:	db "Hello, Holberton", 0
-fmt:	db "%s", 10, 0
+section .data
+	hello db "Hello, Holberton", 0
 
-	SECTION .text
-	extern printf
+section .text
 	global main
+
+	extern printf
+	global _start
+
 main:
-	mov esi, msg
-	mov edi, fmt
-	mov eax, 0
+	; Prepare arguments for printf
+	mov rdi, hello
+	mov rax, 0            ; 0 corresponds to the format string "%s"
 	call printf
 
-	mov eax, 0
-	ret
+	; Exit the program
+	mov rax, 60           ; syscall number for exit
+	xor rdi, rdi          ; exit code 0
+	syscall
+
