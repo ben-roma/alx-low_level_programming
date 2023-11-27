@@ -1,30 +1,50 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
+#include <fcntl.h>
 
 /**
- * main - Entry point of the program
- * @ac: The number of command-line arguments
- * @av: An array containing the command-line arguments
+ * read_textfile - Lit un fichier texte et l'affiche sur la sortie standard.
+ * @filename: pointeur vers le nom du fichier.
+ * @letters: Nombre de lettres que la fonction doit lire et imprimer.
  *
- * Return: Always 0 (Success)
+ * Retourne : Retourne 0 si le nom du fichier est NULL.
  */
-int main(int ac, char **av)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t n;
+	int f_d, w_cnt, w_r;
+	char *buffer;
 
-	if (ac != 2)
+	if (filename == NULL)
+		return (0);
+
+	f_d = open(filename, O_RDONLY);
+	if (f_d == -1)
+		return (0);
+
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
 	{
-		dprintf(2, "Usage: %s filename\n", av[0]);
-		exit(1);
+		close(f_d);
+		return (0);
 	}
 
-	n = read_textfile(av[1], 114);
-	printf("\n(printed chars: %li)\n", n);
+	w_r = read(f_d, buffer, letters);
+	if (w_r == -1)
+	{
+		free(buffer);
+		close(f_d);
+		return (0);
+	}
 
-	n = read_textfile(av[1], 1024);
-	printf("\n(printed chars: %li)\n", n);
+	w_cnt = write(STDOUT_FILENO, buffer, w_r);
+	if (w_cnt == -1 || w_r != w_cnt)
+	{
+		free(buffer);
+		close(f_d);
+		return (0);
+	}
 
-	return (0);
+	free(buffer);
+	close(f_d);
+	return (w_cnt);
 }
 
