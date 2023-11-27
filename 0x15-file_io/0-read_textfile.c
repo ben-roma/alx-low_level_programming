@@ -1,5 +1,6 @@
 #include "main.h"
 #include <fcntl.h>
+#include <stdlib.h>
 
 /**
  * read_textfile - Lit un fichier texte et l'affiche sur la sortie standard.
