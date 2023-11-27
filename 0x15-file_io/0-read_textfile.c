@@ -3,12 +3,15 @@
 #include <stdlib.h>
 
 /**
- * read_textfile - Lit un fichier texte et l'affiche sur la sortie standard.
- * @filename: pointeur vers le nom du fichier.
- * @letters: Nombre de lettres que la fonction doit lire et imprimer.
+ * read_textfile - functions; reads text_file & prints to_stdout.
+ * @filename:pointer: shows to the name of the file.
+ * @letters: Shows the No. of letters the
+ *           function (read_textfile) should read & print.
  *
- * Retourne : Retourne 0 si le nom du fichier est NULL.
+ * Return:Returns 0 if filename is NULL.
+ *
  */
+
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	int f_d, w_cnt, w_r;
