@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/****************START****************/
 /**
  * create_file - function; this creates a file
  *
@@ -14,6 +15,9 @@
  *
  * Return: gives a (-ve) -1 when function fails
  *         Elsewhere returns - 1.
+ *
+ *
+ * ALX PROJECTS
  */
 
 
@@ -46,4 +50,4 @@ int create_file(const char *filename, char *text_content)
 	}
 	return (1);
 }
-
+/**********************START********************/
